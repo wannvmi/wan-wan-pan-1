@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using WanWan.Pan.App.Contracts.Services;
 using WanWan.Pan.App.Contracts.Views;
 using WanWan.Pan.App.ViewModels;
@@ -15,14 +16,23 @@ namespace WanWan.Pan.App.Services
         private readonly INavigationService _navigationService;
         private IShellWindow _shellWindow;
 
-        public ApplicationHostService(IServiceProvider serviceProvider, INavigationService navigationService)
+        private readonly ILogger<ApplicationHostService> _logger;
+        private readonly IHostEnvironment _hostEnvironment;
+        public ApplicationHostService(
+            IServiceProvider serviceProvider, 
+            INavigationService navigationService,
+            ILogger<ApplicationHostService> logger, 
+            IHostEnvironment hostEnvironment)
         {
             _serviceProvider = serviceProvider;
             _navigationService = navigationService;
+            _logger = logger;
+            _hostEnvironment = hostEnvironment;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Environment: {@_hostEnvironment}", _hostEnvironment);
             // Initialize services that you need before app activation
             await InitializeAsync();
 
@@ -34,6 +44,7 @@ namespace WanWan.Pan.App.Services
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation("WanWan.Pan.App is stopping.");
             await Task.CompletedTask;
         }
 
@@ -44,6 +55,7 @@ namespace WanWan.Pan.App.Services
 
         private async Task StartupAsync()
         {
+            _logger.LogInformation("WanWan.Pan.App running.");
             await Task.CompletedTask;
         }
 

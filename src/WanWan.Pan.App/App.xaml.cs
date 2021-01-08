@@ -41,16 +41,19 @@ namespace WanWan.Pan.App
         private async void OnStartup(object sender, StartupEventArgs e)
         {
             var appLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-
+            var aa = Directory.GetCurrentDirectory();
+            var vv = AppContext.BaseDirectory;
             // For more information about .NET generic host see  https://docs.microsoft.com/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0
             _host = Host.CreateDefaultBuilder(e.Args)
-#if DEBUG
-                .UseEnvironment(Environments.Development)
-#else
-                //.UseEnvironment(Environments.Staging)
-                .UseEnvironment(Environments.Production)
-#endif
+//#if DEBUG
+//                .UseEnvironment(Environments.Development)
+//#else
+//                //.UseEnvironment(Environments.Staging)
+//                .UseEnvironment(Environments.Production)
+//#endif
                 .UseContentRoot(AppContext.BaseDirectory)
+                .ConfigureAppConfiguration(c => { c.SetBasePath(appLocation); })
+                .ConfigureServices(ConfigureServices)
                 .UseSerilog((hostingContext, loggerConfiguration) =>
                 {
                     loggerConfiguration
@@ -60,15 +63,10 @@ namespace WanWan.Pan.App
                         .WriteTo.Debug()
                         .WriteTo.Console(theme: SystemConsoleTheme.Colored)
                         .WriteTo.File(Path.Combine(AppContext.BaseDirectory, "log", "log.log"),
-                            outputTemplate: OutputInfoTemplate, rollingInterval: RollingInterval.Day)
+                            outputTemplate: OutputPropTemplate, rollingInterval: RollingInterval.Day)
                         .WriteTo.File(Path.Combine(AppContext.BaseDirectory, "log", "error.log"), LogEventLevel.Warning,
                             outputTemplate: OutputPropTemplate, rollingInterval: RollingInterval.Day);
                 })
-                .ConfigureAppConfiguration(c =>
-                {
-                    c.SetBasePath(appLocation);
-                })
-                .ConfigureServices(ConfigureServices)
                 .Build();
 
             await _host.StartAsync();
