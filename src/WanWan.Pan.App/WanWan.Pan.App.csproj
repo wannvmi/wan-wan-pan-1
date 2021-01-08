@@ -16,8 +16,4 @@
     <ProjectReference Include="..\WanWan.Pan.Core\WanWan.Pan.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>

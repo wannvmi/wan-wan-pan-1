@@ -12,17 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WanWan.Pan.App.ViewModels;
 
-namespace WanWan.Pan.App
+namespace WanWan.Pan.App.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// BlankPage.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BlankPage : Page
     {
-        public MainWindow()
+        public BlankPage(BlankViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
     }
 }
