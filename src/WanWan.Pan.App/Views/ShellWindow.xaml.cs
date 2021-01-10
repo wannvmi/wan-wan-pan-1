@@ -23,7 +23,34 @@ namespace WanWan.Pan.App.Views
         public ShellWindow()
         {
             InitializeComponent();
+            this.Zone.MouseDoubleClick += (sender, e) => { Max(); };
+            //Messenger.Default.Register<bool>(this, "PackUp", PackUp);
         }
+
+        #region Messenger
+
+        /// <summary>
+        /// 收起面板
+        /// </summary>
+        /// <param name="ischecked"></param>
+        public void PackUp(bool ischecked)
+        {
+            MenuToggleButton.IsChecked = ischecked;
+        }
+
+        /// <summary>
+        /// 最大化
+        /// </summary>
+        /// <param name="msg"></param>
+        public void Max(bool Mask = false)
+        {
+            if (this.WindowState == WindowState.Maximized)
+                this.WindowState = WindowState.Normal;
+            else
+                this.WindowState = WindowState.Maximized;
+        }
+
+        #endregion
 
         public Frame GetNavigationFrame()
             => ShellFrame;

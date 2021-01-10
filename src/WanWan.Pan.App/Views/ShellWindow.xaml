@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WanWan.Pan.App.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:UserControls="clr-namespace:WanWan.Pan.App.Common.UserControls"
         mc:Ignorable="d"
         Title="ShellWindow" Height="450" Width="800"
         AllowsTransparency="True"
@@ -12,10 +14,55 @@
         ResizeMode="CanResizeWithGrip" >
     <Grid>
         <Border BorderBrush="#009688" BorderThickness="1"/>
-        <Frame
-            x:Name="ShellFrame"
-            Grid.Row="1"
-            NavigationUIVisibility="Hidden"
-            Focusable="False" />
+        <Border BorderBrush="#009688" BorderThickness="1"/>
+        <materialDesign:DialogHost Identifier="RootDialog" Margin="1">
+            <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+                <materialDesign:DrawerHost.LeftDrawerContent>
+                    <DockPanel MinWidth="210">
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                    DockPanel.Dock="Top"
+                                    HorizontalAlignment="Right" Margin="15"
+                                    IsChecked="{Binding ElementName=MenuToggleButton, 
+                        Path=IsChecked, Mode=TwoWay}" />
+                        <UserControls:MainLeftMenu/>
+                    </DockPanel>
+                </materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel>
+                    <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2" Name="Zone"
+                                          Padding="20" Mode="PrimaryMid" DockPanel.Dock="Top">
+                        <UniformGrid Columns="2">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                                <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                      IsChecked="False" x:Name="MenuToggleButton"/>
+                                <TextBlock  Text="  WPF MVVM SAMPLE"  VerticalAlignment="Center" FontSize="22"/>
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right" 
+                            VerticalAlignment="Center">
+                                <UserControls:MainPopupBox Margin="0 0 5 0"/>
+                                <UserControls:MainNotice/>
+                            </StackPanel>
+                        </UniformGrid>
+                    </materialDesign:ColorZone>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>   
+                        <UserControls:MainLeftMenu />
+                        <Grid>
+                            <Frame
+                                x:Name="ShellFrame"
+                                Grid.Column="0"
+                                NavigationUIVisibility="Hidden"
+                                Focusable="False" />
+                        </Grid>
+
+                        <!--<UserControls:MainTabControl Grid.Column="1" />-->
+                        <!--<ContentControl Content="{Binding CurrentPage}" />-->
+                    </Grid>
+                </DockPanel>
+            </materialDesign:DrawerHost>
+        </materialDesign:DialogHost>
     </Grid>
 </Window>
