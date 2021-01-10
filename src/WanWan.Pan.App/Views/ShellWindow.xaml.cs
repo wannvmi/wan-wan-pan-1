@@ -26,7 +26,7 @@ namespace WanWan.Pan.App.Views
         }
 
         public Frame GetNavigationFrame()
-            => shellFrame;
+            => ShellFrame;
 
         public void ShowWindow()
             => Show();
