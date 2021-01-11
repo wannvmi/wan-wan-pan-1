@@ -1,4 +1,4 @@
-﻿<Window 
+﻿<Window
     x:Class="WanWan.Pan.App.MaterialDesignMainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -144,49 +144,14 @@
     <materialDesign:DialogHost Identifier="Root" IsOpen="{Binding DialogIsOpen}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Grid x:Name="MENU" Width="60">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="125" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Image
-                    Width="36"
-                    Height="36"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Source="pack://application:,,,/Consumption.PC;Component/Images/test_user.png">
-                    <Image.Clip>
-                        <EllipseGeometry
-                            Center="18,18"
-                            RadiusX="18"
-                            RadiusY="18" />
-                    </Image.Clip>
-                </Image>
-
-                <ItemsControl
-                    Name="IC"
-                    Grid.Row="1"
-                    ItemsSource="{Binding ModuleManager.ModuleGroups}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-
-                    <ItemsControl.ItemTemplateSelector>
-                        <template:ModuleTemplateSelector ExpanderTemplate="{StaticResource expanderTemplate}" GroupTemplate="{StaticResource groupTemplate}" />
-                    </ItemsControl.ItemTemplateSelector>
-                </ItemsControl>
-            </Grid>
-
             <materialDesign:Snackbar
                 x:Name="SnackbarThree"
-                Grid.ColumnSpan="2" Panel.ZIndex="1"
+                Grid.ColumnSpan="2"
                 VerticalAlignment="Top"
+                Panel.ZIndex="1"
                 MessageQueue="{materialDesign:MessageQueue}" />
 
             <Grid Grid.Column="1">
@@ -230,19 +195,19 @@
                                 PlacementMode="BottomAndAlignRightEdges"
                                 StaysOpen="False">
                                 <StackPanel>
-                                    <Button >
+                                    <Button>
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon VerticalAlignment="Center" Kind="Github" />
                                             <TextBlock Text="  Github" />
                                         </StackPanel>
                                     </Button>
-                                    <Button >
+                                    <Button>
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon VerticalAlignment="Center" Kind="AlphaBBox" />
                                             <TextBlock Text="  视频教程" />
                                         </StackPanel>
                                     </Button>
-                                    <Button >
+                                    <Button>
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon VerticalAlignment="Center" Kind="Qqchat" />
                                             <TextBlock Text="  加入QQ" />
@@ -400,17 +365,6 @@
                             </dragablz:DragablzItemsControl.ItemTemplate>
                         </dragablz:DragablzItemsControl>
                     </Grid>
-                </materialDesign:ColorZone>
-                <!--  工具栏(显示标签和功能清单)  -->
-                <materialDesign:ColorZone Grid.Row="1" CornerRadius="3">
-                    <DockPanel>
-                        <TextBlock
-                            Padding="15"
-                            FontSize="26"
-                            FontWeight="Bold"
-                            Text="{Binding ElementName=page, Path=Content.DataContext.SelectPageTitle}" />
-                        <template:ToolbarContainer HorizontalAlignment="Right" DataContext="{Binding ElementName=page, Path=Content.DataContext}" />
-                    </DockPanel>
                 </materialDesign:ColorZone>
                 <!--  右侧内容区域  -->
                 <ContentControl
