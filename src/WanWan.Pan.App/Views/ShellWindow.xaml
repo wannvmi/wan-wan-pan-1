@@ -70,7 +70,7 @@
                             <Frame
                                 x:Name="ShellFrame"
                                 Focusable="False"
-                                NavigationUIVisibility="Hidden" />
+                                NavigationUIVisibility="Hidden" HorizontalAlignment="Right" Width="598" />
                         </ContentControl>
                         <!--<Grid>
                             <Frame
