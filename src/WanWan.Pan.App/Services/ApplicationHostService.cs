@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
@@ -11,21 +13,25 @@ using WanWan.Pan.App.ViewModels;
 namespace WanWan.Pan.App.Services
 {
     public class ApplicationHostService : IHostedService
-    {
+    {        
+        private IShellWindow _shellWindow;
+
         private readonly IServiceProvider _serviceProvider;
         private readonly INavigationService _navigationService;
-        private IShellWindow _shellWindow;
+        private readonly IApplicationInfoService _applicationInfoService;
 
         private readonly ILogger<ApplicationHostService> _logger;
         private readonly IHostEnvironment _hostEnvironment;
         public ApplicationHostService(
             IServiceProvider serviceProvider, 
             INavigationService navigationService,
+            IApplicationInfoService applicationInfoService,
             ILogger<ApplicationHostService> logger, 
             IHostEnvironment hostEnvironment)
         {
             _serviceProvider = serviceProvider;
             _navigationService = navigationService;
+            _applicationInfoService = applicationInfoService;
             _logger = logger;
             _hostEnvironment = hostEnvironment;
         }
@@ -33,6 +39,8 @@ namespace WanWan.Pan.App.Services
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Environment: {@_hostEnvironment}", _hostEnvironment);
+            _logger.LogInformation("Version: {@Version}", _applicationInfoService.GetVersion());
+
             // Initialize services that you need before app activation
             await InitializeAsync();
 
