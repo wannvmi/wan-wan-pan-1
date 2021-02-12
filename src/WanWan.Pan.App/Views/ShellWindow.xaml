@@ -7,15 +7,11 @@
     Title="ShellWindow"
     Width="800"
     Height="450"
-    AllowsTransparency="True"
-    ResizeMode="CanResizeWithGrip"
-    WindowStartupLocation="CenterScreen"
-    WindowStyle="None"
     mc:Ignorable="d">
     <Grid>
         <Frame
             x:Name="ShellFrame"
-            Grid.Column="0"
+            Grid.Row="1"
             Focusable="False"
             NavigationUIVisibility="Hidden" />
     </Grid>

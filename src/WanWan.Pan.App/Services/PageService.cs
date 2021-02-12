@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using WanWan.Pan.App.Contracts.Services;
-using WanWan.Pan.App.Helpers;
 using WanWan.Pan.App.ViewModels;
 using WanWan.Pan.App.Views;
 
@@ -52,7 +50,7 @@ namespace WanWan.Pan.App.Services
         }
 
         private void Configure<VM, V>()
-            where VM : Observable
+            where VM : ObservableObject
             where V : Page
         {
             lock (_pages)

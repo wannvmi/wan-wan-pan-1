@@ -5,12 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using WanWan.Pan.App.Contracts.Services;
 using WanWan.Pan.App.Helpers;
 
 namespace WanWan.Pan.App.ViewModels
 {
-    public class ShellViewModel : Observable
+    public class ShellViewModel : ObservableObject
     {
         private readonly INavigationService _navigationService;
         private RelayCommand _goBackCommand;
@@ -56,7 +58,7 @@ namespace WanWan.Pan.App.ViewModels
 
         private void OnNavigated(object sender, string viewModelName)
         {
-            GoBackCommand.OnCanExecuteChanged();
+            GoBackCommand.NotifyCanExecuteChanged();
         }
     }
 }
