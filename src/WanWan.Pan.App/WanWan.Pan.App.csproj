@@ -17,4 +17,8 @@
     <ProjectReference Include="..\WanWan.Pan.Core\WanWan.Pan.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>
